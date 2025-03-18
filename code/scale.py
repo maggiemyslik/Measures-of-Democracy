@@ -122,6 +122,27 @@ def get_variable_scale(var_name):
         return 2  
     return 5 
 
+def scale_row(row):
+    for col in row.index:
+        scale_max = get_variable_scale(col)
+
+        if scale_max == 2:
+            row[col] = min(max(row[col], 0), 1)  # Ensure binary (0 or 1)
+        
+        elif col in percentage_scales:
+            row[col] = (row[col] / 100) * 4  # Rescale 0-100 → 0-4
+        
+        elif scale_max > 5:
+            row[col] = (row[col] / scale_max) * 4  # Scale down to 0-4
+        
+        else:
+            row[col] = min(max(row[col], 0), 4)  # Ensure all values are within 0-4
+    
+    return row
+
+
+"""
+
 
 def apply_scaling(dataframe, columns):    
     for col in columns:
@@ -134,7 +155,7 @@ def apply_scaling(dataframe, columns):
             factor = scale_max / 5 if scale_max > 5 else 1  
 
         if factor is not None:
-            dataframe[col] *= factor
+            dataframe[col] *= factor"""
 
 
 
