@@ -5,8 +5,8 @@ question_scales = {
     'v2clprptym':6,
     'v2clprptyw':6,
     'v2clrgunev':3, 
-    'v2cscnsult':2,
-    'v2csprtcpt':3,
+    'v2cscnsult':3,
+    'v2csprtcpt':4,
     'v2csrlgcon': 3,
     'v2dlconslt': 6,
     'v2dlcountr':6,
@@ -43,11 +43,11 @@ question_scales = {
     'v2exremhsp':4,  
     'v2jupack':4,
     'v2jureform':3,
-    'v2lgcomslo':3,
+    'v2lgcomslo':4,
     'v2lglegplo':3,
     'v2lglegpup':3,
     'v2lgoppart':3,
-    'v2mecenefi':3,
+    'v2mecenefi':4,
     'v2mecrit':4,
     'v2medentrain':4,
     'v2medpatriot':4,
@@ -90,6 +90,10 @@ question_scales = {
     'v3lglegpup':3,
     'v3lgoppart':3,
     'v3partyid':7,
+    'v2peapsgeo':6,
+    'v2regpower':14,
+    'v2regproreg':14,
+    'v2smregcap':5  
     }
 
 percentage_scales = ['v2clsnlpct', 'v2mefemjrn', 'v2svstterr']
@@ -97,13 +101,13 @@ percentage_scales = ['v2clsnlpct', 'v2mefemjrn', 'v2svstterr']
 binary_scales = ['v2eldommon','v2elintmon','v2elmonden', 'v2elmonref', 'v2elrstrct', 'v2elrsthog', 
                  'v2elrsthos', 'v2elreggov', 'v2edmath', 'v2edpoledprim', 'v2ellocgov', 'v2elffelrbin', 
                  'v3lgbudglo', 'v3lgbudgup','v2mecenefibin', 'v2jureview', 'v2lgstafflo', 'v2lgsrvlo', 'v2lgdsadlobin',
-                 'v2lgfunds', 'v2lgqstexp', 'v2edteunion', 'v2smprivex', 'v2smregcap', 'v3lgfunds', 'v3lgqstexp', 
+                 'v2lgfunds', 'v2lgqstexp', 'v2edteunion', 'v2smprivex', 'v3lgfunds', 'v3lgqstexp', 
                  'v3lgsrvlo']
 
 binary_starts_with = ['v2elsnlfc_', 'v2casoe_', 'v2clrgstch_', 'v2edideolch_', 'v2csanmvch_', 
                       'v2clrgwkch_', 'v2smorgtypes_', 'v2smhargr_', 'v2exl_legitideolcr_', 'v2csstruc_', 
                       'v2regoppgroupsact_', 'v2regoppgroups_', 'v2regsupgroups_', 'v2exctlhg_', 'v2exrmhgnp_',
-                      'v2exctlhs_', 'v2exrmhsol_', 'v2psbantar_', 'v2elsnmrfc_', 'v2elsnlfc_', 'v2edpoledsec', 'v2edscpatriot',
+                      'v2exctlhs_', 'v3equavolc_', 'v2exrmhsol_', 'v2psbantar_', 'v2elsnmrfc_', 'v2elsnlfc_', 'v2edpoledsec', 'v2edscpatriot',
                       ]
 
 
@@ -111,7 +115,7 @@ def get_variable_scale(var_name):
     if var_name in question_scales:
         return question_scales[var_name]
     if var_name in percentage_scales:
-        return 100 
+        return 101 
     if var_name in binary_scales:
         return 2  
     if any(var_name.startswith(prefix) for prefix in binary_starts_with):
