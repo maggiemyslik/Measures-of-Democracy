@@ -107,7 +107,7 @@ binary_scales = ['v2eldommon','v2elintmon','v2elmonden', 'v2elmonref', 'v2elrstr
 binary_starts_with = ['v2elsnlfc_', 'v2casoe_', 'v2clrgstch_', 'v2edideolch_', 'v2csanmvch_', 
                       'v2clrgwkch_', 'v2smorgtypes_', 'v2smhargr_', 'v2exl_legitideolcr_', 'v2csstruc_', 
                       'v2regoppgroupsact_', 'v2regoppgroups_', 'v2regsupgroups_', 'v2exctlhg_', 'v2exrmhgnp_',
-                      'v2exctlhs_', 'v3equavolc_', 'v2exrmhsol_', 'v2psbantar_', 'v2elsnmrfc_', 'v2elsnlfc_', 'v2edpoledsec', 'v2edscpatriot',
+                      'v2exctlhs_', 'v3equavouc_', 'v3equavolc_', 'v2exrmhsol_', 'v2psbantar_', 'v2elsnmrfc_', 'v2elsnlfc_', 'v2edpoledsec', 'v2edscpatriot',
                       ]
 
 
@@ -115,12 +115,29 @@ def get_variable_scale(var_name):
     if var_name in question_scales:
         return question_scales[var_name]
     if var_name in percentage_scales:
-        return 101 
+        return 100  
     if var_name in binary_scales:
         return 2  
     if any(var_name.startswith(prefix) for prefix in binary_starts_with):
         return 2  
-    return 5
+    return 5 
+
+
+def apply_scaling(dataframe, columns):    
+    for col in columns:
+        scale_max = get_variable_scale(col)
+        if scale_max == 2:
+            factor = 1  
+        elif col in percentage_scales:
+            factor = 0.05  
+        else:
+            factor = scale_max / 5 if scale_max > 5 else 1  
+
+        if factor is not None:
+            dataframe[col] *= factor
+
+
+
 
 
 
